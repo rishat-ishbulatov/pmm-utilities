@@ -1,4 +1,4 @@
-# External-postgreSQL
+# External-PostgreSQL
 [Task description](https://jira.percona.com/browse/PMM-10913)
 ## How to use
 * `make` - prints help message.
