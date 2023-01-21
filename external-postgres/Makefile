@@ -23,11 +23,10 @@ compose-up:
 down:                                                                           ## Compose down up external postgres and percona-server.
 	docker compose down --remove-orphans --rmi local
 
-all: up                                                                         ## Initialize and compose up external postgres and percona-server.
+all: up                                                                         ## Initialize and compose up external postgres and percona-server. `make all user=<user>|example_user database=<database_name>|example_database password=<password>|example_password sslmode=<sslmode>|verify-ca postgres=<version>|postgres:14.1`
 
-gen: init certificate-authority external-postgres percona-server remove-srl     ## Regenerates all variables needed to run. `make all user=<user>|example_user database=<database_name>|example_database password=<password>|example_password sslmode=<sslmode>|verify-ca postgres=<version>|postgres:14.1`
-
-clean: down                                                                     ## Clean up project to initial state.
+gen: init certificate-authority external-postgres percona-server remove-srl     ## Regenerates all variables needed to up.
+clean: down                                                                     ## Clean-up project to initial state.
 	rm -rf ./certificate-configurations \
 		./external-postgres-certificates \
 		./percona-server-certificates \
@@ -101,7 +100,6 @@ init:
 	sed -i "s,__WITH_HBA__,$(withHBACompose),g" ./docker-compose.yml
 	sed -i "s,__PERCONA_SERVER__,$(percona),g" ./Dockerfile.Percona
 	sed -i "s,__POSTGRES_VERSION__,$(postgres),g" ./Dockerfile.Postgres
-
 
 remove-srl:
 	rm ./external-postgres-certificates/certificate_authority.srl ./percona-server-certificates/certificate_authority.srl
