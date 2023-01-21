@@ -1,0 +1,7 @@
+FROM __POSTGRES_VERSION__
+
+COPY ./external-postgres-certificates /external-postgres-certificates
+__WITH_HBA__
+COPY ./queries/ /docker-entrypoint-initdb.d/
+RUN chown postgres:postgres /external-postgres-certificates/*
+RUN chmod 600 /external-postgres-certificates/*

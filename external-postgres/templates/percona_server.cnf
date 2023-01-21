@@ -1,0 +1,10 @@
+[req]
+distinguished_name = req_distinguished_name
+prompt             = no
+
+[req_distinguished_name]
+C   = EX
+ST  = example state
+L   = example city
+O   = example organization
+CN  = __USER__

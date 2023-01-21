@@ -1,0 +1,44 @@
+---
+version: '3.7'
+services:
+  example-percona-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.Percona
+    container_name: example-percona-server
+    networks:
+      - example-network
+    environment:
+      - POSTGRES_ADDR=example-external-postgres
+      - POSTGRES_DBNAME=__DATABASE__
+      - POSTGRES_USERNAME=__USER__
+      - POSTGRES_DBPASSWORD=__PASSWORD__
+      - POSTGRES_SSL_MODE=__SSL_MODE__
+      - POSTGRES_SSL_CA_PATH=/percona-server-certificates/certificate_authority.crt
+      - POSTGRES_SSL_KEY_PATH=/percona-server-certificates/percona_server.key
+      - POSTGRES_SSL_CERT_PATH=/percona-server-certificates/percona_server.crt
+
+  example-external-postgres:
+    build:
+      context: .
+      dockerfile: Dockerfile.Postgres
+    container_name: example-external-postgres
+    networks:
+      - example-network
+    environment:
+      - POSTGRES_PASSWORD=example-root-password
+    command: |
+      postgres 
+      -c shared_preload_libraries=pg_stat_statements 
+      -c pg_stat_statements.max=10000 
+      -c pg_stat_statements.track=all 
+      -c pg_stat_statements.save=off 
+      __WITH_SSL__ 
+      -c ssl_ca_file=/external-postgres-certificates/certificate_authority.crt 
+      -c ssl_cert_file=/external-postgres-certificates/external_postgres.crt 
+      -c ssl_key_file=/external-postgres-certificates/external_postgres.key
+      __WITH_HBA__
+  
+networks:
+  example-network:
+    name: example-network
