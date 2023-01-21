@@ -1,0 +1,9 @@
+*.vscode*
+*certificate-configurations*
+*external-postgres-certificates*
+*external-postgres-configuration*
+*percona-server-certificates*
+*queries*
+external-postgres/docker-compose.yml
+external-postgres/Dockerfile.Percona
+external-postgres/Dockerfile.Postgres
