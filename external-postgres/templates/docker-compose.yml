@@ -17,6 +17,7 @@ services:
       - POSTGRES_SSL_CA_PATH=/percona-server-certificates/certificate_authority.crt
       - POSTGRES_SSL_KEY_PATH=/percona-server-certificates/percona_server.key
       - POSTGRES_SSL_CERT_PATH=/percona-server-certificates/percona_server.crt
+      - DISABLE_INTERNAL_DB=__DISABLE_INTERNAL_DB__
 
   example-external-postgres:
     build:

@@ -3,7 +3,8 @@ database ?= example_database
 password ?= example_password
 sslmode ?= verify-ca
 postgres ?= postgres:14.1
-percona ?= perconalab/pmm-server-fb:PR-2965-655ea73
+percona ?= perconalab/pmm-server-fb:PR-3053-f011381
+disable-inner-db ?= 1
 
 default: help
 
@@ -100,6 +101,7 @@ init:
 	sed -i "s,__WITH_HBA__,$(withHBACompose),g" ./docker-compose.yml
 	sed -i "s,__PERCONA_SERVER__,$(percona),g" ./Dockerfile.Percona
 	sed -i "s,__POSTGRES_VERSION__,$(postgres),g" ./Dockerfile.Postgres
+	sed -i "s,__DISABLE_INTERNAL_DB__,$(disable-inner-db),g" ./docker-compose.yml
 
 remove-srl:
 	rm ./external-postgres-certificates/certificate_authority.srl ./percona-server-certificates/certificate_authority.srl
