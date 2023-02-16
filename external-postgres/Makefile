@@ -3,8 +3,8 @@ database ?= example_database
 password ?= example_password
 sslmode ?= verify-ca
 postgres ?= postgres:14.1
-percona ?= perconalab/pmm-server-fb:PR-3053-f011381
-disable-inner-db ?= 1
+percona ?= perconalab/pmm-server-fb:PR-3053-ba265f1
+disable-inner-db ?= true
 
 default: help
 
@@ -24,7 +24,7 @@ compose-up:
 down:                                                                           ## Compose down up external postgres and percona-server.
 	docker compose down --remove-orphans --rmi local
 
-all: up                                                                         ## Initialize and compose up external postgres and percona-server. `make all user=<user>|example_user database=<database_name>|example_database password=<password>|example_password sslmode=<sslmode>|verify-ca postgres=<version>|postgres:14.1`
+all: up                                                                         ## Initialize and compose up external postgres and percona-server. `make all user=<user>|example_user database=<database_name>|example_database password=<password>|example_password sslmode=<sslmode>|verify-ca postgres=<version>|postgres:14.1 postgres ?= postgres:14.1 percona=<percona-server-image>|perconalab/pmm-server-fb:PR-3053-ba265f1 disable-inner-db=<1,0>|1`
 
 gen: init certificate-authority external-postgres percona-server remove-srl     ## Regenerates all variables needed to up.
 clean: down                                                                     ## Clean-up project to initial state.
@@ -101,7 +101,7 @@ init:
 	sed -i "s,__WITH_HBA__,$(withHBACompose),g" ./docker-compose.yml
 	sed -i "s,__PERCONA_SERVER__,$(percona),g" ./Dockerfile.Percona
 	sed -i "s,__POSTGRES_VERSION__,$(postgres),g" ./Dockerfile.Postgres
-	sed -i "s,__DISABLE_INTERNAL_DB__,$(disable-inner-db),g" ./docker-compose.yml
+	sed -i "s,__PMM_DISABLE_BUILTIN_POSTGRES__,$(disable-inner-db),g" ./docker-compose.yml
 
 remove-srl:
 	rm ./external-postgres-certificates/certificate_authority.srl ./percona-server-certificates/certificate_authority.srl
