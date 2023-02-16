@@ -3,7 +3,7 @@ database ?= example_database
 password ?= example_password
 sslmode ?= verify-ca
 postgres ?= postgres:14.1
-percona ?= perconalab/pmm-server-fb:PR-3053-ba265f1
+percona ?= perconalab/pmm-server-fb:PR-3053-5388b36
 disable-inner-db ?= true
 
 default: help
@@ -24,7 +24,7 @@ compose-up:
 down:                                                                           ## Compose down up external postgres and percona-server.
 	docker compose down --remove-orphans --rmi local
 
-all: up                                                                         ## Initialize and compose up external postgres and percona-server. `make all user=<user>|example_user database=<database_name>|example_database password=<password>|example_password sslmode=<sslmode>|verify-ca postgres=<version>|postgres:14.1 postgres ?= postgres:14.1 percona=<percona-server-image>|perconalab/pmm-server-fb:PR-3053-ba265f1 disable-inner-db=<1,0>|1`
+all: up                                                                         ## Initialize and compose up external postgres and percona-server. `make all user=<user>|example_user database=<database_name>|example_database password=<password>|example_password sslmode=<sslmode>|verify-ca postgres=<version>|postgres:14.1 postgres ?= postgres:14.1 percona=<percona-server-image>|perconalab/pmm-server-fb:PR-3053-5388b36 disable-inner-db=<1,0>|1`
 
 gen: init certificate-authority external-postgres percona-server remove-srl     ## Regenerates all variables needed to up.
 clean: down                                                                     ## Clean-up project to initial state.
