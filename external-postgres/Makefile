@@ -3,7 +3,7 @@ database ?= example_database
 password ?= example_password
 sslmode ?= verify-ca
 postgres ?= postgres:14.1
-percona ?= perconalab/pmm-server-fb:PR-3061-f001e09
+percona ?= perconalab/pmm-server-fb:PR-3075-bc0cf89
 
 default: help
 

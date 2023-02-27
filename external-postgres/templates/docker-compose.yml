@@ -17,6 +17,10 @@ services:
       - POSTGRES_SSL_CA_PATH=/percona-server-certificates/certificate_authority.crt
       - POSTGRES_SSL_KEY_PATH=/percona-server-certificates/percona_server.key
       - POSTGRES_SSL_CERT_PATH=/percona-server-certificates/percona_server.crt
+      - PMM_DEBUG=1
+      - PERCONA_TEST_TELEMETRY_INTERVAL=10s
+      - PERCONA_TEST_TELEMETRY_DISABLE_START_DELAY=1
+      - PERCONA_TEST_TELEMETRY_RETRY_BACKOFF=10s
 
   example-external-postgres:
     build:
