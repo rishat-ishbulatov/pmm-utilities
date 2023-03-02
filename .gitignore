@@ -7,3 +7,4 @@
 external-postgres/docker-compose.yml
 external-postgres/Dockerfile.Percona
 external-postgres/Dockerfile.Postgres
+external-clickhouse/db
