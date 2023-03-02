@@ -1,0 +1,26 @@
+---
+version: '3.7'
+services:
+  example-percona-server:
+    image: __PERCONA_SERVER_VERSION__
+    container_name: example-percona-server
+    depends_on:
+      - example-external-clickhouse
+    networks:
+      - example-network
+    environment:
+      - PERCONA_TEST_PMM_CLICKHOUSE_ADDR=example-external-clickhouse:9000
+      - PERCONA_TEST_PMM_CLICKHOUSE_DATABASE=pmm
+      - PERCONA_TEST_PMM_CLICKHOUSE_BLOCK_SIZE=10000
+      - PERCONA_TEST_PMM_CLICKHOUSE_POOL_SIZE=2
+
+  example-external-clickhouse:
+    image: __CLICKHOUSE_VERSION__
+    container_name: example-external-clickhouse
+    networks:
+      - example-network
+    __WITH_VOLUME__
+
+networks:
+  example-network:
+    name: example-network
