@@ -10,3 +10,4 @@ Repository of utilities that came in handy during hypothesis testing and develop
 * Docker Compose version v2.14.1
 
 ### [External PostgreSQL](https://github.com/rishat-ishbulatov/pmm-utilities/tree/main/external-postgres)
+### [External Clickhouse](https://github.com/rishat-ishbulatov/pmm-utilities/tree/main/external-clickhouse)
