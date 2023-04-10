@@ -3,8 +3,8 @@ database ?= example_database
 password ?= example_password
 sslmode ?= verify-ca
 postgres ?= postgres:14.1
-percona ?= perconalab/pmm-server-fb:PR-2965-f961a3d
-disable-inner-db ?= true
+percona ?= perconalab/pmm-server-fb:PR-3185-617899f
+disable-inner-db ?= false
 
 default: help
 
