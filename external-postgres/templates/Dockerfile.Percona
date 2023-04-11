@@ -2,4 +2,7 @@ FROM __PERCONA_SERVER__
 
 COPY ./percona-server-certificates /percona-server-certificates
 RUN chown grafana:grafana /percona-server-certificates/*
+COPY ./grafana-certificates /grafana-certificates
+RUN chown grafana:grafana /grafana-certificates/*
 RUN chmod 600 /percona-server-certificates/*
+RUN chmod 600 /grafana-certificates/*

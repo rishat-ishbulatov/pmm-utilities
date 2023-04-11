@@ -22,6 +22,11 @@ services:
       - PERCONA_TEST_TELEMETRY_DISABLE_START_DELAY=1
       - PERCONA_TEST_TELEMETRY_RETRY_BACKOFF=10s
       - PERCONA_TEST_PMM_DISABLE_BUILTIN_POSTGRES=__PMM_DISABLE_BUILTIN_POSTGRES__
+      - GF_DATABASE_URL=postgres://__GRAFANA_USER__:__GRAFANA_PASSWORD__@example-external-postgres:5432/__GRAFANA_DATABASE__
+      - GF_DATABASE_SSL_MODE=__SSL_MODE__
+      - GF_DATABASE_CA_CERT_PATH=/grafana-certificates/certificate_authority.crt
+      - GF_DATABASE_CLIENT_KEY_PATH=/grafana-certificates/grafana.key
+      - GF_DATABASE_CLIENT_CERT_PATH=/grafana-certificates/grafana.crt
 
   example-external-postgres:
     build:
